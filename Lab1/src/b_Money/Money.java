@@ -89,9 +89,14 @@ public class Money implements Comparable {
 	 * (Again, remember converting the value of the other Money to this Currency)
 	 */
 	public Money sub(Money other) {
-		Currency currency = this.getCurrency();
-		int amount = this.getAmount() - currency.valueInThisCurrency(other.getAmount(), other.getCurrency());
-		Money resultMoney = new Money(amount, currency);
+		Currency thisCurrency = this.getCurrency();
+		Currency otherCurrency = other.getCurrency();
+		int thisAmount = this.getAmount();
+		int otherAmount = other.getAmount();
+				
+		thisAmount -= thisCurrency.valueInThisCurrency(otherAmount, otherCurrency);
+				
+		Money resultMoney = new Money(thisAmount, thisCurrency);
 		return resultMoney;
 	}
 	
